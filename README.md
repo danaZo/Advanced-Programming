@@ -1,5 +1,6 @@
 # Advanced-Programming
 Advanced Programming course assignment 1
+By Dana Zorohov and Noa Nussbaum
 
 # MyShell
 
