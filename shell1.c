@@ -1,5 +1,4 @@
 #include <sys/stat.h>
-#include <sys/wait.h>
 #include <fcntl.h>
 #include "stdio.h"
 #include "errno.h"
@@ -8,46 +7,50 @@
 #include <string.h>
 
 int main() {
-int i, amper, retid, status;
-char *argv[10];
-char command[1024];
-char *token;
+    int i, amper, retid, status;
+    char *argv[10];
+    char command[1024];
+    char *token;
 
-while (1) {
-    printf("hello: ");
-    fgets(command, 1024, stdin);
-    command[strlen(command) - 1] = '\0'; // replace \n with \0
+    while (1) {
+        printf("hello: ");
+        fgets(command, 1024, stdin);
+        command[strlen(command) - 1] = '\0'; // Remove newline character
 
-    /* parse command line */
-    i = 0;
-    token = strtok (command," ");
-    while (token != NULL)
-    {
-        argv[i] = token;
-        token = strtok (NULL, " ");
-        i++;
-    }
-    argv[i] = NULL;
-
-    /* Is command empty */ 
-    if (argv[0] == NULL)
-        continue;
-
-    /* Does command line end with & */ 
-    if (! strcmp(argv[i - 1], "&")) {
-        amper = 1;
-        argv[i - 1] = NULL;
+        /* Tokenize the input command */
+        i = 0;
+        token = strtok(command, " ");
+        
+        while (token != NULL) {
+            argv[i] = token;
+            token = strtok(NULL, " ");
+            i++;
         }
-    else 
-        amper = 0; 
+        
+        argv[i] = NULL;
 
-    /* for commands not part of the shell command language */ 
+        /* Check if command is empty */ 
+        if (argv[0] == NULL)
+            continue;
 
-    if (fork() == 0) { 
-        execvp(argv[0], argv);
+        /* Check if the command ends with '&' */ 
+        if (!strcmp(argv[i - 1], "&")) {
+            amper = 1;
+            argv[i - 1] = NULL;
+        } else {
+            amper = 0;
+        } 
+
+        /* Execute external commands */ 
+        if (fork() == 0) { 
+            execvp(argv[0], argv);
+            // If execvp fails
+            fprintf(stderr, "Error executing command: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+
+        /* Parent process waits for the child to complete if not running in background */
+        if (amper == 0)
+            wait(NULL);
     }
-    /* parent continues here */
-    if (amper == 0)
-        wait(NULL);
-}
 }
