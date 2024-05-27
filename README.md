@@ -1,6 +1,8 @@
 # Advanced-Programming
-Advanced Programming course assignment 1
-By Dana Zorohov and Noa Nussbaum
+Advanced Programming course assignment 1 </br>
+# Created By: 
+* [Dana Zorohov](https://github.com/danaZo)
+* [Noa Nussbaum](https://github.com/Noa-Nussbaum)
 
 # MyShell
 
