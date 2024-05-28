@@ -29,12 +29,12 @@ typedef struct variable {
     struct variable *next;
 } Variable;
 
-/* hash_string
+/* compute_hash
  * Computes the hash value for a given string.
  * Params: const char *str - The string to hash.
  * Returns: unsigned int - The computed hash value.
  */
-unsigned int hash_string(const char *str);
+unsigned int compute_hash(const char *str);
 
 /* get_variable
  * Retrieves a variable from the hash table by its name.

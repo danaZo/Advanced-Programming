@@ -16,13 +16,13 @@
  */
 Variable *hash_table[HASH_TABLE_SIZE];
 
-/* hash_string
+/* compute_hash
  * Computes the hash value for a given string.
  * Implementation: Uses a simple hash function that multiplies and adds character values.
  * Params: const char *str - The string to hash.
  * Returns: unsigned int - The computed hash value.
  */
-unsigned int hash_string(const char *str) {
+unsigned int compute_hash(const char *str) {
     unsigned int hash = 0;
     while (*str) {
         hash = hash * 31 + *str;
@@ -38,7 +38,7 @@ unsigned int hash_string(const char *str) {
  * Returns: Variable* - A pointer to the variable struct, or NULL if not found.
  */
 Variable *get_variable(const char *name) {
-    unsigned int hash = hash_string(name);
+    unsigned int hash = compute_hash(name);
     Variable *var = hash_table[hash];
     while (var != NULL) {
         if (strcmp(var->name, name) == 0) {
@@ -58,7 +58,7 @@ Variable *get_variable(const char *name) {
 void set_variable(const char *name, const char *value) {
     Variable *var = get_variable(name);
     if (var == NULL) {
-        unsigned int hash = hash_string(name);
+        unsigned int hash = compute_hash(name);
         var = (Variable *)malloc(sizeof(Variable));
         strncpy(var->name, name, MAX_VAR_NAME_LEN);
         var->next = hash_table[hash];
