@@ -1,21 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <termios.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <fcntl.h>
-#include "errno.h"
-#include <signal.h>
-#include <ctype.h> 
-#include "hash_table.h"
-#include "utils.h"
-#include "parse.h"
-#include "executor.h"
-
-#define MAX_COMMANDS 20
+#include "myshell.h"
 
 char *outfile,*last_command = "", *prompt_name = "hello";
 char ***args,**pipe_commands, *commands[MAX_COMMANDS]; // Array to store command history
