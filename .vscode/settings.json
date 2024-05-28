@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "sstream": "c",
+        "string": "c",
+        "vector": "c",
+        "memory": "c",
+        "string_view": "c",
+        "system_error": "c",
+        "typeinfo": "c",
+        "stdlib.h": "c"
+    }
+}
