@@ -1,6 +1,6 @@
 # Advanced-Programming
 Advanced Programming course assignment 1 </br>
-# Created By: 
+## Created By: 
 * [Dana Zorohov](https://github.com/danaZo)
 * [Noa Nussbaum](https://github.com/Noa-Nussbaum)
 
