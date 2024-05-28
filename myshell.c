@@ -12,6 +12,7 @@
 #include <ctype.h> 
 #include "hash_table.h"
 #include "utils.h"
+#include "parse.h"
 
 #define REDIRECT_OUT 1
 #define REDIRECT_ERR 2
@@ -27,25 +28,6 @@ int input_length = 0, command_index = 0,num_commands = 0; // Index of currently 
 int fd, amper,redirect,retid,status,changed_prompt,changed_last,orig_stdin,orig_stdout;
 
 
-int parser(char*** argv,char* str, int idx){
-    int i = 0;
-    argv[idx] = (char **) malloc(10 * sizeof (char *));
-    // Remove trailing spaces at the end of the input string
-    int len = strlen(str);
-    while (len > 0 && str[len - 1] == ' ') {
-        str[len - 1] = '\0';
-        len--;
-    }
-    char *token;
-    if (*str == ' ') str++;
-    token = strtok(str, " ");
-    while (token != NULL) {
-        argv[idx][i++] = token;
-        token = strtok(NULL, " ");
-    }
-    argv[idx][i] = NULL;
-    return i;
-}
 void cleanInput(){
     input[0] = '\0';
     input_length = 0;

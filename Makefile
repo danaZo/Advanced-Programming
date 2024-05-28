@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -g -Werror
 
-OBJS = myshell.o hash_table.o utils.o
-DEPS = hash_table.h utils.h
+OBJS = myshell.o hash_table.o utils.o parse.o
+DEPS = hash_table.h utils.h parse.h
 
 myshell: $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
@@ -15,6 +15,9 @@ hash_table.o: hash_table.c
 
 utils.o: utils.c
 	$(CC) $(CFLAGS) -c utils.c
+
+parse.o: parse.c
+	$(CC) $(CFLAGS) -c parse.c
 
 .PHONY: clean
 
