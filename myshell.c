@@ -19,7 +19,6 @@
 #define REDIRECT_APP 3
 #define REDIRECT_IN 4
 #define MAX_COMMANDS 20
-#define MAX_COMMAND_LENGTH 1024
 
 char *outfile,*last_command = "", *prompt_name = "hello";
 char ***args,**pipe_commands, *commands[MAX_COMMANDS]; // Array to store command history
