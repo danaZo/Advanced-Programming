@@ -4,73 +4,112 @@ Advanced Programming course assignment 1 </br>
 * [Dana Zorohov](https://github.com/danaZo)
 * [Noa Nussbaum](https://github.com/Noa-Nussbaum)
 
-# MyShell
+MyShell is a shell program developed as part of our Advanced Programming course assignment. The program is designed to interpret and execute user commands in a simulated shell environment. It includes features   commonly found in Unix-like shells,such as command execution, redirection, pipelining, handling variables, and control flow.
 
+#### Getting Started
 
-MyShell is a straightforward shell implementation crafted in C++, offering essential command-line interface functionalities. It includes features commonly found in Unix-like shells, such as command execution, input/output redirection, background processes, and basic control flow structures like if statements.
+##### Prerequisites
+- GCC compiler
+- A Unix-like environment
 
-## Features
-
-- **Command Execution:** Run single commands or command pipelines with input/output redirection.
-- **Built-in Commands:** Supports built-in commands like `cd`, `echo`, and `read`.
-- **Variable Management:** Modify the prompt and define custom variables.
-- **Signal Handling:** Manage Ctrl+C interruptions smoothly.
-- **Control Flow:** Use `if` statements for conditional execution.
-- **Background Execution:** Execute commands in the background with the `&` operator.
-- **Error Handling:** Includes basic error handling for syntax errors in `if` statements.
-
-## Getting Started
-
-### Prerequisites
-
-- C++ compiler with C++2a support (e.g., Clang++-14).
-- Use WSL on Windows
-
-### Compilation
-
-Compile the code using a C++ compiler and the Makefile for easy running. For example:
-
+##### Compilation
+To compile the shell program, use the following command in your terminal:
 ```bash
-make run
+make
 ```
 
-## Running the Shell
-
-Run the compiled executable:
-
+##### Running the Shell
+To start the shell, run:
 ```bash
 ./myshell
 ```
 
-## Commands Guide
+#### Features and Commands
+The shell supports a variety of commands and features as described below:
 
-- **`>`**: Redirects standard output (stdout) to a specified file. Example: `command > output.txt` redirects stdout to `output.txt`.
-- **`2>`**: Redirects standard error (stderr) to a specified file. Example: `command 2> error.txt` redirects stderr to `error.txt`.
-- **`>>`**: Appends output to a file, creating it if it doesn't exist. Example: `echo "text" >> output.txt` appends "text" to `output.txt`.
-- **`prompt`**: Changes the prompt text. Usage: `prompt = "new_prompt"`.
-- **`echo`**: Prints arguments to the terminal. Example: `echo Hello, World!` displays "Hello, World!".
-- **`$?`**: Shows the exit status of the last command. Example: `echo $?` prints the last command's exit status.
-- **`!!`**: Repeats the last command. Typing `!!` reruns the previous command.
-- **`cd`**: Changes the current directory. Example: `cd /path/to/directory`.
-- **`quit`**: Exits the shell. Typing `quit` terminates the session.
-- **`Up Arrow`**: Scrolls up through previously entered commands. Pressing the up arrow key will show the last command executed.
-- **`Down Arrow`**: Scrolls down through the command history. If you have navigated up through previous commands, pressing the down arrow key will take you to more recent commands.
-- **`Left Arrow`**: Moves the cursor to the left within the current command line. This allows you to edit the command before executing it.
-- **`Right Arrow`**: Moves the cursor to the right within the current command line. This is useful for navigating and editing commands before execution.
-- **`^c`**: Interrupts a running process with Ctrl+C. Displays "You Typed Control-C!" but keeps the shell running.
-- **`pipe`**: Connects commands, passing the output of one as input to another. Example: `command1 | command2`.
-- **`$var`**: Creates and uses variables. Example: `$name = "John"` assigns "John" to `$name`.
-- **`read`**: Prompts for and stores user input in variables. Example: `read variable_name`.
-- **`echo $var`**: Prints the value of a variable. Example: `echo $name` displays "John".
-- **`if/else`**: Implements conditional execution. Example:
+1. **Command Execution**
+   - Execute commands with arguments.
+   ```bash
+   hello: ls -l
+   ```
 
-  ```bash
-  if [ condition ]
-  then
-      [ command if true ]
-  else
-      [ command if false ]
-  fi
-  ```
+2. **Background Execution**
+   - Execute commands in the background using `&`.
+   ```bash
+   hello: ls -l &
+   ```
 
+3. **Redirection**
+   - Redirect output to a file using `>`.
+   ```bash
+   hello: ls -l > file
+   ```
+   - Append output to a file using `>>`.
+   ```bash
+   hello: ls -l >> mylog
+   ```
+   - Redirect standard error using `2>`.
+   ```bash
+   hello: ls -l nofile 2> mylog
+   ```
 
+4. **Pipelines**
+   - Use pipes to direct the output of one command as the input to another.
+   ```bash
+   hello: cat myfile | grep "search_term"
+   ```
+
+5. **Variable Handling**
+   - Set and use variables.
+   ```bash
+   hello: $person = David
+   hello: echo $person
+   ```
+
+6. **Read Command**
+   - Prompt for input and store in a variable.
+   ```bash
+   hello: read name
+   hello: echo $name
+   ```
+
+7. **Command History**
+   - Navigate through recent commands using the up and down arrow keys.
+
+8. **Control Flow**
+   - Implement if-else conditions.
+   ```bash
+   if date | grep Fri
+   then
+     echo "Shabat Shalom"
+   else
+     echo "Hard way to go"
+   fi
+   ```
+
+9. **Change Prompt**
+   - Change the command prompt display.
+   ```bash
+   hello: prompt = myprompt
+   ```
+
+10. **Change Directory**
+    - Change the current working directory.
+    ```bash
+    hello: cd mydir
+    ```
+
+11. **Repeat Last Command**
+    - Repeat the last executed command using `!!`.
+    ```bash
+    hello: !!
+    ```
+
+12. **Exit**
+    - Exit the shell using `quit`.
+    ```bash
+    hello: quit
+    ```
+
+13. **Interrupt Handling**
+    - Handle Ctrl-C interrupts gracefully, printing a message rather than terminating.
