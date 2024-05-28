@@ -99,12 +99,11 @@ int exec(const char* com, int flag){
         else
             amper = 0;
 
-        if (i > 3 && args[j][1][0] == '$' && !strcmp(args[j][i - 2], "=")){   //Q10 ---not finished
+        if (i > 2 && args[j][0][0] == '$' && !strcmp(args[j][i - 2], "=")){   //Q10
             set_variable(args[j][i-3]+1,args[j][i-1]);
             statusim[j] = 0;
             continue;
         }
-
 
         if (! strcmp(args[j][0], "read")){
             input[0] = '\0';
