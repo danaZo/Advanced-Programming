@@ -20,11 +20,11 @@
 
 #define MAX_COMMANDS 20
 
-extern char *outfile, *last_command, *prompt_name;
+extern char *outfile, *last_command, *prompt_title;
 extern char ***args, **pipe_commands, *commands[MAX_COMMANDS];
 extern char input[MAX_COMMAND_LENGTH];
 extern int input_length, command_index, num_commands;
-extern int fd, amper, redirect, retid, status, changed_prompt, changed_last, orig_stdin, orig_stdout;
+extern int fd, amper, redirect, retid, status, changed_prompt, changed_last, original_stdin, original_stdout;
 
 void cleanInput();
 void sigint_handler(int signum);

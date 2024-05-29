@@ -14,14 +14,29 @@
 #define REDIRECT_APP 3
 #define REDIRECT_IN 4
 
-extern char *prompt_name;
-extern int orig_stdin, orig_stdout, retid, status;
+extern char *prompt_title;
+extern int original_stdin, original_stdout, retid, status;
 extern int input_length;
 extern char input[MAX_COMMAND_LENGTH];
 extern int changed_prompt, amper, redirect;
 extern char **pipe_commands, ***args;
 extern char *outfile;
 extern int fd;
+
+
+/**
+ * Executes a command string `com` that may include multiple commands separated by pipes and various types of redirection.
+ * This function handles command parsing, pipe creation, process forking, and I/O redirection based on the parsed commands.
+ * It supports background execution, variable setting, changing working directories, and custom prompt settings among other features.
+ * The function forks child processes for each command segment, setting up necessary pipes and redirects stdout, stderr, or stdin
+ * as specified by redirection operators ('>', '>>', '<', '2>'). The `flag` parameter determines whether the last command's output
+ * is redirected to `/dev/null`.
+ * 
+ * @param com The command string to execute, which can include pipes and redirection.
+ * @param flag If non-zero, redirects the output of the last command in the pipeline to `/dev/null`.
+ * @return The exit status of the last command executed or a failed status if an internal operation like fork or pipe fails.
+ */
+
 
 int exec_command(const char* com, int flag){
     int num_pipes = countCharOccurrences(com,'|');
@@ -45,6 +60,7 @@ int exec_command(const char* com, int flag){
     int pid,i;
     args = (char ***) malloc((num_pipes + 1) * sizeof(char **));
     int statusim[num_pipes+1];
+    /*Action for each possible command*/
     for (int j = 0; j < num_pipes + 1; ++j) {
         i = parser(args,pipe_commands[j],j);
         if (args[j][0] == NULL)
@@ -79,8 +95,8 @@ int exec_command(const char* com, int flag){
 
 
         if (i>2 && ! strcmp(args[j][i - 3], "prompt") && (! strcmp(args[j][i - 2], "="))) {  //Q2
-            if (changed_prompt) free(prompt_name);
-            prompt_name = strdup(args[j][i - 1]);
+            if (changed_prompt) free(prompt_title);
+            prompt_title = strdup(args[j][i - 1]);
             changed_prompt = 1;
             statusim[j] = 0;
             continue;
@@ -206,8 +222,8 @@ int exec_command(const char* com, int flag){
         }
     }
     //redirect stdin and stdout to originals fds
-    dup2(orig_stdin, 0);
-    dup2(orig_stdout, 1);
+    dup2(original_stdin, 0);
+    dup2(original_stdout, 1);
 
     status = statusim[num_pipes];
     for (int i = 0; i < num_pipes+1; i++) {

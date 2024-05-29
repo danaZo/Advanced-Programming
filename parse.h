@@ -7,8 +7,7 @@
 int parser(char*** argv,char* str, int idx);
 void cleanInput();
 void sigint_handler(int signum);
-
-extern char input[MAX_COMMAND_LENGTH], *prompt_name; // Input buffer for current command
+extern char input[MAX_COMMAND_LENGTH], *prompt_title; // Input buffer for current command
 extern int input_length, retid;
 
 

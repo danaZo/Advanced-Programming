@@ -8,43 +8,61 @@
 
 
 
-int parser(char*** argv,char* str, int idx){
+// In this function we parse from the user's input and clean the string
+
+int parser(char*** argv,char* string, int idx){
+    // Initialize values
     int i = 0;
     argv[idx] = (char **) malloc(10 * sizeof (char *));
-    // Remove trailing spaces at the end of the input string
-    int len = strlen(str);
-    while (len > 0 && str[len - 1] == ' ') {
-        str[len - 1] = '\0';
-        len--;
+
+    // Remove unnecessary spaces at the end of the input
+    int length = strlen(string);
+    // Go through string
+    while (length > 0 && string[length - 1] == ' ') {
+        string[length - 1] = '\0';
+        length--;
     }
+    // Define token
     char *token;
-    if (*str == ' ') str++;
-    token = strtok(str, " ");
+
+    if (*string == ' ') string++;
+    token = strtok(string, " ");
     while (token != NULL) {
         argv[idx][i++] = token;
         token = strtok(NULL, " ");
     }
+
     argv[idx][i] = NULL;
     return i;
 }
 
+// In this functionwe clean the input that was entered by the user
+
 void cleanInput(){
+
+// Initialize valuess
     input[0] = '\0';
     input_length = 0;
-
-    printf("%s:", prompt_name);
+// Print prompt
+    printf("%s:", prompt_title);
     fflush(stdout);
+
 }
 
+// Response to esc, CTRL C 
+
 void sigint_handler(int signum) {
-    printf("\r\033[K"); // Clear the current line
+    // Clear the current line
+    printf("\r\033[K"); 
     if (retid > 0) {
-        // Send SIGINT to the child process
+        // Send SIGINT to child process
         kill(retid, SIGINT);
         retid = 0;
     } else{
+        // If we get CTRL C then print this
+
         printf("You typed Control-C!\n");
-        printf("%s:", prompt_name);
+        printf("%s:", prompt_title);
         fflush(stdout);
     }
 }

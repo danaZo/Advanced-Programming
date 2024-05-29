@@ -14,7 +14,7 @@
 /* hash_table
  * A global hash table for storing variables.
  */
-Variable *hash_table[HASH_TABLE_SIZE];
+Variable *variables[HASH_TABLE_SIZE];
 
 /* compute_hash
  * Computes the hash value for a given string.
@@ -22,13 +22,13 @@ Variable *hash_table[HASH_TABLE_SIZE];
  * Params: const char *str - The string to hash.
  * Returns: unsigned int - The computed hash value.
  */
-unsigned int compute_hash(const char *str) {
-    unsigned int hash = 0;
-    while (*str) {
-        hash = hash * 31 + *str;
-        str++;
+unsigned int compute_hash(const char *string) {
+    unsigned int h = 0;
+    while (*string) {
+        h = h * 31 + *string;
+        string++;
     }
-    return hash % HASH_TABLE_SIZE;
+    return h % HASH_TABLE_SIZE;
 }
 
 /* get_variable
@@ -37,11 +37,11 @@ unsigned int compute_hash(const char *str) {
  * Params: const char *name - The name of the variable to retrieve.
  * Returns: Variable* - A pointer to the variable struct, or NULL if not found.
  */
-Variable *get_variable(const char *name) {
-    unsigned int hash = compute_hash(name);
-    Variable *var = hash_table[hash];
+Variable *get_variable(const char *title) {
+    unsigned int hash = compute_hash(title);
+    Variable *var = variables[hash];
     while (var != NULL) {
-        if (strcmp(var->name, name) == 0) {
+        if (strcmp(var->name, title) == 0) {
             return var;
         }
         var = var->next;
@@ -55,16 +55,16 @@ Variable *get_variable(const char *name) {
  * Params: const char *name - The name of the variable to set.
  *         const char *value - The value to set for the variable.
  */
-void set_variable(const char *name, const char *value) {
-    Variable *var = get_variable(name);
+void set_variable(const char *title, const char *val) {
+    Variable *var = get_variable(title);
     if (var == NULL) {
-        unsigned int hash = compute_hash(name);
+        unsigned int hash = compute_hash(title);
         var = (Variable *)malloc(sizeof(Variable));
-        strncpy(var->name, name, MAX_VAR_NAME_LEN);
-        var->next = hash_table[hash];
-        hash_table[hash] = var;
+        strncpy(var->name, title, MAX_VAR_NAME_LEN);
+        var->next = variables[hash];
+        variables[hash] = var;
     }
-    strncpy(var->value, value, MAX_VAR_VALUE_LEN);
+    strncpy(var->value, val, MAX_VAR_VALUE_LEN);
 }
 
 /* free_hash_table
@@ -73,7 +73,7 @@ void set_variable(const char *name, const char *value) {
  */
 void free_hash_table() {
     for (int i = 0; i < HASH_TABLE_SIZE; i++) {
-        Variable *currNode = hash_table[i];
+        Variable *currNode = variables[i];
         while (currNode != NULL) {
             Variable *nextNode = currNode->next;
             free(currNode);
