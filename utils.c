@@ -1,13 +1,21 @@
+/**
+ * utils.c
+ * 
+ * Implementation By: Dana Zorohov, Noa Nussbaum
+ * 
+ * This file contains implementations of utility functions for the shell,
+ * including functions for getting a single character from the terminal,
+ * performing modular arithmetic, counting occurrences of a character in a string,
+ * and displaying a command prompt.
+*/
 
-#include <stdio.h>
-#include <termios.h>
-#include <unistd.h>
 #include "utils.h"
 
-
-// Function to read a single character from the terminal without waiting for the Enter key to be pressed
+/* get_char
+ * Reads a single character from the terminal without echoing it.
+ * Returns: char - The character read from the terminal.
+*/
 char get_char(){
-    // Initialize values
     char buf = 0;
     struct termios old = {0};
     if (tcgetattr(0, &old) < 0)
@@ -29,18 +37,26 @@ char get_char(){
     return buf;
 }
 
-// Mod function
+/* mod_func
+ * Performs modular arithmetic on two integers.
+ * Params: int a - The dividend.
+ *         int b - The divisor.
+ * Returns: int - The result of the modulo operation.
+*/
 int mod_func(int a, int b){
     int r = a % b;
     return r < 0 ? r + b : r;
 }
 
-// This function counts number of character occurences in given string
+/* num_of_char
+ * Counts the occurrences of a specified character in a string.
+ * Params: const char* string - The string to search.
+ *         char c - The character to count.
+ * Returns: int - The number of occurrences of the specified character in the string.
+*/
 int num_of_char(const char* string, char c) {
     int count = 0;
-    // Run through string
     while (*string != '\0') {
-        // If sees char then add to count
         if (*string == c) {
             count++;
         }
@@ -49,10 +65,12 @@ int num_of_char(const char* string, char c) {
     return count;
 }
 
+/* showCommand
+ * Displays the command prompt and the current command being typed.
+ * Params: char* command - The current command being typed.
+*/
 void showCommand(char* command){
-    // Clear the current line
-    printf("\r\033[K"); 
-    // Print the prompt and command
+    printf("\r\033[K");
     printf("%s:%s", prompt_title, command);
     fflush(stdout);
 }

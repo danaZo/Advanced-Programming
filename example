@@ -1,144 +1,145 @@
 user@DESKTOP-IPGT95N:~/Advanced-Programming$ ./myshell
 hello:ls -l
-total 240
--rw-r--r-- 1 user user   517 May 28 19:51 Makefile
--rw-r--r-- 1 user user  2579 May 28 18:56 README.md
--rw-r--r-- 1 user user  1177 May 28 18:56 example
--rw-r--r-- 1 user user  6895 May 28 19:57 executor.c
--rw-r--r-- 1 user user   106 May 28 19:46 executor.h
--rw-r--r-- 1 user user 21696 May 28 20:03 executor.o
--rw-r--r-- 1 user user  2684 May 28 19:25 hash_table.c
--rw-r--r-- 1 user user  1782 May 28 19:26 hash_table.h
--rw-r--r-- 1 user user  6864 May 28 20:03 hash_table.o
--rw-r--r-- 1 user user  1074 May 28 11:10 key.c
--rwxr-xr-x 1 user user 41064 May 28 20:03 myshell
--rw-r--r-- 1 user user  7655 May 28 20:03 myshell.c
--rw-r--r-- 1 user user 19752 May 28 20:03 myshell.o
--rw-r--r-- 1 user user   638 May 28 18:56 parse.c
--rw-r--r-- 1 user user   130 May 28 18:56 parse.h
--rw-r--r-- 1 user user  4888 May 28 20:03 parse.o
--rw-r--r-- 1 user user  1514 May 28 11:10 shell2.c
--rw-r--r-- 1 user user  2800 May 28 11:10 shell3.c
--rw-r--r-- 1 user user 54501 May 26 21:16 task1.pdf
--rw-r--r-- 1 user user  1100 May 28 11:10 utils.c
--rw-r--r-- 1 user user   205 May 28 11:10 utils.h
--rw-r--r-- 1 user user  9544 May 28 20:03 utils.o
+total 272
+-rw-r--r-- 1 user user   575 May 29 20:40 Makefile
+-rw-r--r-- 1 user user  2579 May 29 20:40 README.md
+-rw-r--r-- 1 user user  5132 May 29 20:40 example
+-rw-r--r-- 1 user user 17724 May 29 21:36 executor.c
+-rw-r--r-- 1 user user  1110 May 29 21:37 executor.h
+-rw-r--r-- 1 user user 21760 May 29 22:20 executor.o
+-rw-r--r-- 1 user user  2655 May 29 20:40 hash_table.c
+-rw-r--r-- 1 user user  1770 May 29 20:40 hash_table.h
+-rw-r--r-- 1 user user  6832 May 29 22:20 hash_table.o
+-rw-r--r-- 1 user user  1074 May 29 20:40 key.c
+-rwxr-xr-x 1 user user 42064 May 29 22:20 myshell
+-rw-r--r-- 1 user user 15709 May 29 22:09 myshell.c
+-rw-r--r-- 1 user user   806 May 29 22:20 myshell.h
+-rw-r--r-- 1 user user 18848 May 29 22:20 myshell.o
+-rw-r--r-- 1 user user  1669 May 29 21:30 parse.c
+-rw-r--r-- 1 user user  1185 May 29 21:32 parse.h
+-rw-r--r-- 1 user user  9176 May 29 22:20 parse.o
+-rw-r--r-- 1 user user  1514 May 29 20:40 shell2.c
+-rw-r--r-- 1 user user  2800 May 29 20:40 shell3.c
+-rw-r--r-- 1 user user 54501 May 29 20:40 task1.pdf
+-rw-r--r-- 1 user user  2013 May 29 21:36 utils.c
+-rw-r--r-- 1 user user  1330 May 29 21:38 utils.h
+-rw-r--r-- 1 user user  9560 May 29 22:20 utils.o
 hello:ls -l > file
 hello:cat file
-total 240
--rw-r--r-- 1 user user   517 May 28 19:51 Makefile
--rw-r--r-- 1 user user  2579 May 28 18:56 README.md
--rw-r--r-- 1 user user  1177 May 28 18:56 example
--rw-r--r-- 1 user user  6895 May 28 19:57 executor.c
--rw-r--r-- 1 user user   106 May 28 19:46 executor.h
--rw-r--r-- 1 user user 21696 May 28 20:03 executor.o
--rw-r----- 1 user user     0 May 28 20:03 file
--rw-r--r-- 1 user user  2684 May 28 19:25 hash_table.c
--rw-r--r-- 1 user user  1782 May 28 19:26 hash_table.h
--rw-r--r-- 1 user user  6864 May 28 20:03 hash_table.o
--rw-r--r-- 1 user user  1074 May 28 11:10 key.c
--rwxr-xr-x 1 user user 41064 May 28 20:03 myshell
--rw-r--r-- 1 user user  7655 May 28 20:03 myshell.c
--rw-r--r-- 1 user user 19752 May 28 20:03 myshell.o
--rw-r--r-- 1 user user   638 May 28 18:56 parse.c
--rw-r--r-- 1 user user   130 May 28 18:56 parse.h
--rw-r--r-- 1 user user  4888 May 28 20:03 parse.o
--rw-r--r-- 1 user user  1514 May 28 11:10 shell2.c
--rw-r--r-- 1 user user  2800 May 28 11:10 shell3.c
--rw-r--r-- 1 user user 54501 May 26 21:16 task1.pdf
--rw-r--r-- 1 user user  1100 May 28 11:10 utils.c
--rw-r--r-- 1 user user   205 May 28 11:10 utils.h
--rw-r--r-- 1 user user  9544 May 28 20:03 utils.o
+total 272
+-rw-r--r-- 1 user user   575 May 29 20:40 Makefile
+-rw-r--r-- 1 user user  2579 May 29 20:40 README.md
+-rw-r--r-- 1 user user  5132 May 29 20:40 example
+-rw-r--r-- 1 user user 17724 May 29 21:36 executor.c
+-rw-r--r-- 1 user user  1110 May 29 21:37 executor.h
+-rw-r--r-- 1 user user 21760 May 29 22:20 executor.o
+-rw-r----- 1 user user     0 May 29 22:21 file
+-rw-r--r-- 1 user user  2655 May 29 20:40 hash_table.c
+-rw-r--r-- 1 user user  1770 May 29 20:40 hash_table.h
+-rw-r--r-- 1 user user  6832 May 29 22:20 hash_table.o
+-rw-r--r-- 1 user user  1074 May 29 20:40 key.c
+-rwxr-xr-x 1 user user 42064 May 29 22:20 myshell
+-rw-r--r-- 1 user user 15709 May 29 22:09 myshell.c
+-rw-r--r-- 1 user user   806 May 29 22:20 myshell.h
+-rw-r--r-- 1 user user 18848 May 29 22:20 myshell.o
+-rw-r--r-- 1 user user  1669 May 29 21:30 parse.c
+-rw-r--r-- 1 user user  1185 May 29 21:32 parse.h
+-rw-r--r-- 1 user user  9176 May 29 22:20 parse.o
+-rw-r--r-- 1 user user  1514 May 29 20:40 shell2.c
+-rw-r--r-- 1 user user  2800 May 29 20:40 shell3.c
+-rw-r--r-- 1 user user 54501 May 29 20:40 task1.pdf
+-rw-r--r-- 1 user user  2013 May 29 21:36 utils.c
+-rw-r--r-- 1 user user  1330 May 29 21:38 utils.h
+-rw-r--r-- 1 user user  9560 May 29 22:20 utils.o
 hello:ls -l nofile 2> mylog
 hello:cat mylog
 ls: cannot access 'nofile': No such file or directory
 hello:ls -l >> mylog
 hello:cat mylog
 ls: cannot access 'nofile': No such file or directory
-total 248
--rw-r--r-- 1 user user   517 May 28 19:51 Makefile
--rw-r--r-- 1 user user  2579 May 28 18:56 README.md
--rw-r--r-- 1 user user  1177 May 28 18:56 example
--rw-r--r-- 1 user user  6895 May 28 19:57 executor.c
--rw-r--r-- 1 user user   106 May 28 19:46 executor.h
--rw-r--r-- 1 user user 21696 May 28 20:03 executor.o
--rw-r----- 1 user user  1190 May 28 20:03 file
--rw-r--r-- 1 user user  2684 May 28 19:25 hash_table.c
--rw-r--r-- 1 user user  1782 May 28 19:26 hash_table.h
--rw-r--r-- 1 user user  6864 May 28 20:03 hash_table.o
--rw-r--r-- 1 user user  1074 May 28 11:10 key.c
--rw-r--r-- 1 user user    54 May 28 20:03 mylog
--rwxr-xr-x 1 user user 41064 May 28 20:03 myshell
--rw-r--r-- 1 user user  7655 May 28 20:03 myshell.c
--rw-r--r-- 1 user user 19752 May 28 20:03 myshell.o
--rw-r--r-- 1 user user   638 May 28 18:56 parse.c
--rw-r--r-- 1 user user   130 May 28 18:56 parse.h
--rw-r--r-- 1 user user  4888 May 28 20:03 parse.o
--rw-r--r-- 1 user user  1514 May 28 11:10 shell2.c
--rw-r--r-- 1 user user  2800 May 28 11:10 shell3.c
--rw-r--r-- 1 user user 54501 May 26 21:16 task1.pdf
--rw-r--r-- 1 user user  1100 May 28 11:10 utils.c
--rw-r--r-- 1 user user   205 May 28 11:10 utils.h
--rw-r--r-- 1 user user  9544 May 28 20:03 utils.o
+total 280
+-rw-r--r-- 1 user user   575 May 29 20:40 Makefile
+-rw-r--r-- 1 user user  2579 May 29 20:40 README.md
+-rw-r--r-- 1 user user  5132 May 29 20:40 example
+-rw-r--r-- 1 user user 17724 May 29 21:36 executor.c
+-rw-r--r-- 1 user user  1110 May 29 21:37 executor.h
+-rw-r--r-- 1 user user 21760 May 29 22:20 executor.o
+-rw-r----- 1 user user  1242 May 29 22:21 file
+-rw-r--r-- 1 user user  2655 May 29 20:40 hash_table.c
+-rw-r--r-- 1 user user  1770 May 29 20:40 hash_table.h
+-rw-r--r-- 1 user user  6832 May 29 22:20 hash_table.o
+-rw-r--r-- 1 user user  1074 May 29 20:40 key.c
+-rw-r--r-- 1 user user    54 May 29 22:21 mylog
+-rwxr-xr-x 1 user user 42064 May 29 22:20 myshell
+-rw-r--r-- 1 user user 15709 May 29 22:09 myshell.c
+-rw-r--r-- 1 user user   806 May 29 22:20 myshell.h
+-rw-r--r-- 1 user user 18848 May 29 22:20 myshell.o
+-rw-r--r-- 1 user user  1669 May 29 21:30 parse.c
+-rw-r--r-- 1 user user  1185 May 29 21:32 parse.h
+-rw-r--r-- 1 user user  9176 May 29 22:20 parse.o
+-rw-r--r-- 1 user user  1514 May 29 20:40 shell2.c
+-rw-r--r-- 1 user user  2800 May 29 20:40 shell3.c
+-rw-r--r-- 1 user user 54501 May 29 20:40 task1.pdf
+-rw-r--r-- 1 user user  2013 May 29 21:36 utils.c
+-rw-r--r-- 1 user user  1330 May 29 21:38 utils.h
+-rw-r--r-- 1 user user  9560 May 29 22:20 utils.o
 hello:prompt = myprompt
 myprompt:echo abc xyz
 abc xyz 
-myprompt:prompt = hello
-hello:echo $?
+myprompt:prompt = Dana
+Dana:echo $?
 0
-hello:!!
+Dana:!!
 256
 You typed Control-C!
-hello:$person = Dana
-hello:echo person
+Dana:$person = Noa
+Dana:echo person
 person 
-hello:echo $person
-Dana
-hello:echo Enter a string
+Dana:echo $person
+Noa
+Dana:echo Enter a string
 Enter a string 
-hello:read name
+Dana:read name
 Noa
-hello:echo $name
+Dana:echo $name
 Noa
-hello:if date | grep Fri
+Dana:if date | grep Fri
 then
         echo "Shabat Shalom"
 else
         echo "Hard way to go"
 fi
 "Hard way to go" 
-hello:date >> myfile
-hello:cat myfile
-Tue May 28 20:05:51 IDT 2024
-hello:date -u >> myfile
-hello:cat myfile
-Tue May 28 20:05:51 IDT 2024
-Tue May 28 17:06:01 UTC 2024
-hello:wc -l < myfile
+Dana:date >> myfile
+Dana:cat myfile
+Wed May 29 22:23:23 IDT 2024
+Dana:date -u >> myfile
+Dana:cat myfile
+Wed May 29 22:23:23 IDT 2024
+Wed May 29 19:23:34 UTC 2024
+Dana:wc -l < myfile
 2
-hello:prompt = hi
-hi:mkdir mydir
-hi:cd mydir
-hi:pwd
+Dana:prompt = Noa
+Noa:mkdir mydir
+Noa:cd mydir
+Noa:pwd
 /home/user/Advanced-Programming/mydir
-hi:touch file1 file2 file3
-hi:ls
+Noa:touch file1 file2 file3
+Noa:ls
 file1  file2  file3
-hi:!!
+Noa:!!
 file1  file2  file3
-hi:echo abc xyz
+Noa:echo abc xyz
 abc xyz 
-hi:ls
+Noa:ls
 file1  file2  file3
-hi:echo $?
+Noa:echo $?
 0
-hi:echo $?
+Noa:echo $?
 256
-hi:ls no_such_file 2> file
-hi:cat file
-ls: cannot access 'no_such_file': No such file or directory
+Noa:ls no_such_file 2> file
 You typed Control-C!
-hi:cat > colors.txt
+Noa:cat > colors.txt
 blue
 black
 red
@@ -149,7 +150,7 @@ green
 red
 red
 blue
-hi:cat colors.txt
+Noa:cat colors.txt
 blue
 black
 red
@@ -160,7 +161,7 @@ green
 red
 red
 blue
-hi:cat colors.txt | cat | cat | cat
+Noa:cat colors.txt | cat | cat | cat
 blue
 black
 red
@@ -171,8 +172,8 @@ green
 red
 red
 blue
-hi:sort colors.txt | uniq -c | sort -r | head -3
+Noa:sort colors.txt | uniq -c | sort -r | head -3
       4 red
       3 blue
       2 green
-hi:quit
+Noa:quit

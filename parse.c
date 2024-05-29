@@ -1,28 +1,29 @@
-#include <stdio.h>
-#include <termios.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <signal.h>
+/**
+ * parse.c
+ * 
+ * Implementation By: Dana Zorohov, Noa Nussbaum
+ * 
+ * This file contains functions for parsing input commands in the shell,
+ * cleaning input buffers, and handling signals like SIGINT.
+ */
+
 #include "parse.h"
 
-
-
-// In this function we parse from the user's input and clean the string
-
+/* parse_func
+ * Parses a command string into separate arguments and stores them in a 2D array.
+ * Params: char*** argv - Pointer to a 2D array to store the parsed arguments.
+ *         char* string - The command string to parse.
+ *         int idx - Index to store the parsed arguments in the argv array.
+ * Returns: int - The number of arguments parsed.
+ */
 int parse_func(char*** argv,char* string, int idx){
-    // Initialize values
     int i = 0;
     argv[idx] = (char **) malloc(10 * sizeof (char *));
-
-    // Remove unnecessary spaces at the end of the input
     int length = strlen(string);
-    // Go through string
     while (length > 0 && string[length - 1] == ' ') {
         string[length - 1] = '\0';
         length--;
     }
-    // Define token
     char *token;
 
     if (*string == ' ') string++;
@@ -36,31 +37,27 @@ int parse_func(char*** argv,char* string, int idx){
     return i;
 }
 
-// In this functionwe clean the input that was entered by the user
-
+/* clean_input
+ * Clears the input buffer and resets the input length.
+ */
 void clean_input(){
-
-// Initialize valuess
     input[0] = '\0';
     input_length = 0;
-// Print prompt
     printf("%s:", prompt_title);
     fflush(stdout);
 
 }
 
-// Response to esc, CTRL C 
-
+/* sigint
+ * Signal handler for SIGINT (Ctrl+C). Cancels the current process if there is one.
+ * Params: int signum - The signal number.
+ */
 void sigint(int signum) {
-    // Clear the current line
     printf("\r\033[K"); 
     if (retid > 0) {
-        // Send SIGINT to child process
         kill(retid, SIGINT);
         retid = 0;
     } else{
-        // If we get CTRL C then print this
-
         printf("You typed Control-C!\n");
         printf("%s:", prompt_title);
         fflush(stdout);
