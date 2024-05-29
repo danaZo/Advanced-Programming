@@ -4,12 +4,16 @@ char *outfile,*last_command = "";
 char *prompt_title = "hello";
 
 char ***args,**pipe_commands;
-char *commands[MAX_COMMANDS]; // Command history
 
-char input[MAX_COMMAND_LENGTH] = ""; // Input buffer for current command
+// Command list
+char *commands[MAX_COMMANDS]; 
+
+// Input buffer for current command
+char input[MAX_COMMAND_LENGTH] = ""; 
 
 int input_length = 0, command_index = 0;
-int num_commands = 0; // Index of current  command
+// Current command index
+int num_commands = 0; 
 
 int fd, amper,redirect,retid,status,changed_prompt,changed_last,original_stdin,original_stdout;
 
@@ -165,7 +169,7 @@ int main(){
                     else if (num_commands < MAX_COMMANDS && command_index < num_commands){
                             command_index++;
                             if (command_index == num_commands){
-                                
+
                                 // If at end of command history, clear input buffer
                                 input[0] = '\0';
                                 input_length = 0;
