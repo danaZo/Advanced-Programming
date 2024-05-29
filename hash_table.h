@@ -41,18 +41,18 @@ unsigned int compute_hash(const char *str);
  * Params: const char *name - The name of the variable to retrieve.
  * Returns: Variable* - A pointer to the variable struct, or NULL if not found.
  */
-Variable *get_variable(const char *name);
+Variable *get_var(const char *name);
 
 /* set_variable
  * Sets the value of a variable in the hash table. If the variable does not exist, it creates a new one.
  * Params: const char *name - The name of the variable to set.
  *         const char *value - The value to set for the variable.
  */
-void set_variable(const char *name, const char *value);
+void set_var(const char *name, const char *value);
 
-/* free_hash_table
+/* free_variables
  * Frees all memory allocated for the hash table.
  */
-void free_hash_table();
+void free_variables();
 
 #endif

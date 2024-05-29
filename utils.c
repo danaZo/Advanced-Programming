@@ -6,7 +6,7 @@
 
 
 // Function to read a single character from the terminal without waiting for the Enter key to be pressed
-char getch(){
+char get_char(){
     // Initialize values
     char buf = 0;
     struct termios old = {0};
@@ -30,13 +30,13 @@ char getch(){
 }
 
 // Mod function
-int mod(int a, int b){
+int mod_func(int a, int b){
     int r = a % b;
     return r < 0 ? r + b : r;
 }
 
 // This function counts number of character occurences in given string
-int countCharOccurrences(const char* string, char c) {
+int num_of_char(const char* string, char c) {
     int count = 0;
     // Run through string
     while (*string != '\0') {
@@ -49,7 +49,7 @@ int countCharOccurrences(const char* string, char c) {
     return count;
 }
 
-void display_command(char* command){
+void showCommand(char* command){
     // Clear the current line
     printf("\r\033[K"); 
     // Print the prompt and command

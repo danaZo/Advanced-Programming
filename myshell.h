@@ -26,7 +26,7 @@ extern char input[MAX_COMMAND_LENGTH];
 extern int input_length, command_index, num_commands;
 extern int fd, amper, redirect, retid, status, changed_prompt, changed_last, original_stdin, original_stdout;
 
-void cleanInput();
-void sigint_handler(int signum);
+void clean_input();
+void sigint(int signum);
 
 #endif // MYSHELL_H

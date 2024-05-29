@@ -39,7 +39,7 @@ extern int fd;
 
 
 int exec_command(const char* com, int flag){
-    int num_pipes = countCharOccurrences(com,'|');
+    int num_pipes = num_of_char(com,'|');
     char* temp_input = strdup(com);
     int pipesfd[num_pipes][2];
     for (int i = 0; i < num_pipes; i++) {
@@ -62,10 +62,10 @@ int exec_command(const char* com, int flag){
     int statusim[num_pipes+1];
     /*Action for each possible command*/
     for (int j = 0; j < num_pipes + 1; ++j) {
-        i = parser(args,pipe_commands[j],j);
+        i = parse_func(args,pipe_commands[j],j);
         if (args[j][0] == NULL)
             break;
-        /* Does command line end with & */
+        /* If command line ends with an & */
         if (i>0 && !strcmp(args[j][i - 1], "&")) {
             amper = 1;
             args[j][i - 1] = NULL;
@@ -73,8 +73,9 @@ int exec_command(const char* com, int flag){
         else
             amper = 0;
 
-        if (i > 2 && args[j][0][0] == '$' && !strcmp(args[j][i - 2], "=")){   //Q10
-            set_variable(args[j][i-3]+1,args[j][i-1]);
+// Question 10
+        if (i > 2 && args[j][0][0] == '$' && !strcmp(args[j][i - 2], "=")){   
+            set_var(args[j][i-3]+1,args[j][i-1]);
             statusim[j] = 0;
             continue;
         }
@@ -85,27 +86,31 @@ int exec_command(const char* com, int flag){
             char command[MAX_COMMAND_LENGTH];
             fgets(command, 1024, stdin);
             command[strlen(command)-1] = '\0';
-            char new_word[20]; // allocate space for the new word
-            strncpy(new_word, args[j][1], 20); // concatenate the original word to the new word
-            set_variable(new_word,command);
+            // Allocate space for new word
+            char new_word[20]; 
+            // Concat original word to new word
+            strncpy(new_word, args[j][1], 20); 
+            set_var(new_word,command);
             statusim[j] = 0;
             continue;
         }
 
 
-
-        if (i>2 && ! strcmp(args[j][i - 3], "prompt") && (! strcmp(args[j][i - 2], "="))) {  //Q2
+//Question 2
+        if (i>2 && ! strcmp(args[j][i - 3], "prompt") && (! strcmp(args[j][i - 2], "="))) {  
             if (changed_prompt) free(prompt_title);
             prompt_title = strdup(args[j][i - 1]);
             changed_prompt = 1;
             statusim[j] = 0;
             continue;
-        } else if (i>1 && ! strcmp(args[j][0], "cd")) {   //Q5
+            // Question 5
+        } else if (i>1 && ! strcmp(args[j][0], "cd")) {   
             chdir(args[j][1]);
             statusim[j] = 0;
             continue;
         }
-        if (i > 1 && !strcmp(args[j][i - 2], ">>")){    //Q1.2
+        // Question 1.2
+        if (i > 1 && !strcmp(args[j][i - 2], ">>")){    
             redirect = REDIRECT_APP;
             args[j][i - 2] = NULL;
             outfile = args[j][i - 1];
@@ -120,7 +125,8 @@ int exec_command(const char* com, int flag){
             args[j][i - 2] = NULL;
             outfile = args[j][i - 1];
         }
-        else if (i > 1 && !strcmp(args[j][i - 2], "2>")) {    //Q1.1
+        // Question 1.1
+        else if (i > 1 && !strcmp(args[j][i - 2], "2>")) {   
             redirect = REDIRECT_ERR;
             args[j][i - 2] = NULL;
             outfile = args[j][i - 1];
@@ -156,14 +162,14 @@ int exec_command(const char* com, int flag){
                 close(STDIN_FILENO) ;
                 dup(fd);
                 close(fd);
-                /* stdin is now redirected */
+                /* stdin is redirected */
             }
             if (redirect == REDIRECT_OUT) {
                 fd = creat(outfile, 0660);
                 close(STDOUT_FILENO) ;
                 dup(fd);
                 close(fd);
-                /* stdout is now redirected */
+                /* stdout is redirected */
             }
             if (redirect == REDIRECT_ERR){
                 if (freopen(outfile, "w", stderr) == NULL) {
@@ -182,12 +188,13 @@ int exec_command(const char* com, int flag){
                 dup(fd);
                 close(fd);
             }
-            if (! strcmp(args[j][0], "echo")) {   //Q3 && Q4
+            // Questions 3 and 4
+            if (! strcmp(args[j][0], "echo")) {   
                 if (args[j][1][0] == '$') {
                     if (args[j][1][1] == '?') {
                         printf("%d\n", status);
                     } else {
-                        Variable *var = get_variable(args[j][1] + 1);
+                        Variable *var = get_var(args[j][1] + 1);
                         if (var)
                             printf("%s\n", var->value);
                     }
@@ -221,7 +228,8 @@ int exec_command(const char* com, int flag){
             statusim[j] = status;
         }
     }
-    //redirect stdin and stdout to originals fds
+
+    //Redirect the stdin and stdout to original fds
     dup2(original_stdin, 0);
     dup2(original_stdout, 1);
 
@@ -229,7 +237,7 @@ int exec_command(const char* com, int flag){
     for (int i = 0; i < num_pipes+1; i++) {
         free(args[i]);
     }
-
+// Free all memory which was allocated
     free(args);
     free(pipe_commands);
     free(temp_input);

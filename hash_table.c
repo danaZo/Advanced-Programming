@@ -31,13 +31,13 @@ unsigned int compute_hash(const char *string) {
     return h % HASH_TABLE_SIZE;
 }
 
-/* get_variable
+/* get_var
  * Retrieves a variable from the hash table by its name.
  * Implementation: Computes the hash and traverses the linked list at that hash index.
  * Params: const char *name - The name of the variable to retrieve.
  * Returns: Variable* - A pointer to the variable struct, or NULL if not found.
  */
-Variable *get_variable(const char *title) {
+Variable *get_var(const char *title) {
     unsigned int hash = compute_hash(title);
     Variable *var = variables[hash];
     while (var != NULL) {
@@ -49,14 +49,14 @@ Variable *get_variable(const char *title) {
     return NULL;
 }
 
-/* set_variable
+/* set_var
  * Sets the value of a variable in the hash table. If the variable does not exist, it creates a new one.
  * Implementation: Computes the hash, creates a new variable if necessary, and sets the value.
  * Params: const char *name - The name of the variable to set.
  *         const char *value - The value to set for the variable.
  */
-void set_variable(const char *title, const char *val) {
-    Variable *var = get_variable(title);
+void set_var(const char *title, const char *val) {
+    Variable *var = get_var(title);
     if (var == NULL) {
         unsigned int hash = compute_hash(title);
         var = (Variable *)malloc(sizeof(Variable));
@@ -67,11 +67,11 @@ void set_variable(const char *title, const char *val) {
     strncpy(var->value, val, MAX_VAR_VALUE_LEN);
 }
 
-/* free_hash_table
+/* Free_variables
  * Frees all memory allocated for the hash table.
  * Implementation: Iterates over each hash index and frees all variables in the linked list.
  */
-void free_hash_table() {
+void free_variables() {
     for (int i = 0; i < HASH_TABLE_SIZE; i++) {
         Variable *currNode = variables[i];
         while (currNode != NULL) {

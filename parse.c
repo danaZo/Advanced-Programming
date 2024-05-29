@@ -10,7 +10,7 @@
 
 // In this function we parse from the user's input and clean the string
 
-int parser(char*** argv,char* string, int idx){
+int parse_func(char*** argv,char* string, int idx){
     // Initialize values
     int i = 0;
     argv[idx] = (char **) malloc(10 * sizeof (char *));
@@ -38,7 +38,7 @@ int parser(char*** argv,char* string, int idx){
 
 // In this functionwe clean the input that was entered by the user
 
-void cleanInput(){
+void clean_input(){
 
 // Initialize valuess
     input[0] = '\0';
@@ -51,7 +51,7 @@ void cleanInput(){
 
 // Response to esc, CTRL C 
 
-void sigint_handler(int signum) {
+void sigint(int signum) {
     // Clear the current line
     printf("\r\033[K"); 
     if (retid > 0) {

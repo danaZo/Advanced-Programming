@@ -19,7 +19,7 @@ int fd, amper,redirect,retid,status,changed_prompt,changed_last,original_stdin,o
 
 
 int main(){
-    signal(SIGINT, sigint_handler);
+    signal(SIGINT, sigint);
 
     printf("%s:",prompt_title);
 
@@ -31,7 +31,7 @@ int main(){
 
     while (1){
 
-        char c = getch(); // Read character from terminal
+        char c = get_char(); // Read character from terminal
 
         if (c == '\n'){
             // Enter key pressed
@@ -39,7 +39,7 @@ int main(){
 
             //If press enter without content then continue
             if (input_length == 0){
-                cleanInput();
+                clean_input();
                 continue;
             }
             if (strcmp(input, "quit") == 0){
@@ -74,7 +74,7 @@ int main(){
                     else{
 
                         status = 158461;
-                        cleanInput();
+                        clean_input();
                         continue;
                     }
                     fgets(than_command,MAX_COMMAND_LENGTH,stdin);
@@ -89,7 +89,7 @@ int main(){
                     }
                     else{
                         status = 158462;
-                        cleanInput();
+                        clean_input();
                         continue;
                     }
 
@@ -110,7 +110,7 @@ int main(){
                     }
                     else{
                         status = 158463;
-                        cleanInput();
+                        clean_input();
                         continue;
                     }
                 }
@@ -128,7 +128,7 @@ int main(){
                 num_commands++;
                 command_index = num_commands;
 
-                cleanInput();
+                clean_input();
             }
             continue;
         }
@@ -138,23 +138,25 @@ int main(){
             if (input_length > 0){
 
                 input[--input_length] = '\0';
-                display_command(input);
+                // // Print the command
+                showCommand(input);
             }
         }
         else if (c == 27){
 
             // If Esc key, check for arrow keys
-            c = getch();
+            c = get_char();
             if (c == '['){
-                c = getch();
+                c = get_char();
                 if (c == 'A'){
 
                     // If Up arrow key, display the previous command in history
                     if (num_commands >= MAX_COMMANDS || (num_commands < MAX_COMMANDS && command_index > 0)){
-                        command_index = mod((command_index - 1), MAX_COMMANDS);
+                        command_index = mod_func((command_index - 1), MAX_COMMANDS);
                         strncpy(input, commands[command_index], MAX_COMMAND_LENGTH - 1);
                         input_length = strlen(input);
-                        display_command(input);
+                // // Print the command
+                        showCommand(input);
                     }
                 }
                 else if (c == 'B'){
@@ -164,7 +166,8 @@ int main(){
                         command_index = (command_index + 1) % MAX_COMMANDS;
                         strncpy(input, commands[command_index], MAX_COMMAND_LENGTH - 1);
                         input_length = strlen(input);
-                        display_command(input);
+                // // Print the command
+                        showCommand(input);
                     }
                     else if (num_commands < MAX_COMMANDS && command_index < num_commands){
                             command_index++;
@@ -178,7 +181,8 @@ int main(){
                                 strncpy(input, commands[command_index], MAX_COMMAND_LENGTH - 1);
                                 input_length = strlen(input);
                             }
-                            display_command(input);
+                            // // Print the command
+                            showCommand(input);
                     }
                 }
             }
@@ -187,7 +191,8 @@ int main(){
             // If a printable character is pressed then append it to input buffer
             input[input_length++] = c;
             input[input_length] = '\0';
-            display_command(input);
+            // Print the command
+            showCommand(input);
         }
     }
 
@@ -207,7 +212,7 @@ int main(){
     if (changed_last) free(last_command);
 
     // Free the variables hash table memory
-    free_hash_table();
+    free_variables();
 
 
     return 0;
