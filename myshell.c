@@ -7,26 +7,6 @@ int input_length = 0, command_index = 0,num_commands = 0; // Index of currently 
 int fd, amper,redirect,retid,status,changed_prompt,changed_last,orig_stdin,orig_stdout;
 
 
-void cleanInput(){
-    input[0] = '\0';
-    input_length = 0;
-
-    printf("%s:", prompt_name);
-    fflush(stdout);
-}
-void sigint_handler(int signum) {
-    printf("\r\033[K"); // Clear the current line
-    if (retid > 0) {
-        // Send SIGINT to the child process
-        kill(retid, SIGINT);
-        retid = 0;
-    } else{
-        printf("You typed Control-C!\n");
-        printf("%s:", prompt_name);
-        fflush(stdout);
-    }
-}
-
 int main(){
     signal(SIGINT, sigint_handler);
     printf("%s:",prompt_name);

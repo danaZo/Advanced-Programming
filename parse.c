@@ -3,7 +3,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 #include "parse.h"
+
 
 
 int parser(char*** argv,char* str, int idx){
@@ -24,5 +26,26 @@ int parser(char*** argv,char* str, int idx){
     }
     argv[idx][i] = NULL;
     return i;
+}
+
+void cleanInput(){
+    input[0] = '\0';
+    input_length = 0;
+
+    printf("%s:", prompt_name);
+    fflush(stdout);
+}
+
+void sigint_handler(int signum) {
+    printf("\r\033[K"); // Clear the current line
+    if (retid > 0) {
+        // Send SIGINT to the child process
+        kill(retid, SIGINT);
+        retid = 0;
+    } else{
+        printf("You typed Control-C!\n");
+        printf("%s:", prompt_name);
+        fflush(stdout);
+    }
 }
 
